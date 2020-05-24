@@ -1,0 +1,47 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-08-01/tenantDeploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "name": {
+            "type": "string",
+            "metadata": {
+                "description": "Management Group ID."
+            }
+        },
+        "displayName": {
+            "type": "string",
+            "metadata": {
+                "description": "The friendly name of the management group. If no value is passed then this field will be set to the groupId."
+            }
+        },
+        "parentId": {
+            "type": "string",
+            "metadata": {
+                "description": "The fully qualified ID for the parent management group. For example, /providers/Microsoft.Management/managementGroups/0000000-0000-0000-0000-000000000000"
+            }
+        }
+    },
+    "functions": [
+    ],
+    "variables": {
+    },
+    "resources": [
+        {
+            "name": "[parameters('name')]",
+            "type": "Microsoft.Management/managementGroups",
+            "apiVersion": "2020-02-01",
+            "properties": {
+                "displayName": "[parameters('displayName')]",
+                "details": {
+                    "parent": {
+                        "id": "[parameters('parentId')]"
+                    }
+                }
+            },
+            "resources": [
+            ]
+        }
+    ],
+    "outputs": {
+    }
+}
